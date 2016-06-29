@@ -1,0 +1,20 @@
+body{
+  background: #EEEEEE;
+}
+
+.PageContent{
+  width:960px;
+  margin:0px auto;
+  padding:10px;
+  background:white;
+}
+
+.shadow{
+  background:white;
+  box-shadow: 0 0 0 0.75pt #d1d1d1, 0 0 3pt 0.75pt #ccc;
+}
+
+h1{
+  font-weight: bold;
+  font-size: 1.5em;
+}

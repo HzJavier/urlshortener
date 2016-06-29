@@ -1,0 +1,37 @@
+<h1>Welcome to the url shortener</h1>
+<br ?>
+<br />
+<div style="float:left; width:450px;">
+  <div>Link to shorten:</div>
+  <div><input type="text" style="width:300px;" /><input id="btnShorten" type="button" value="Shorten" /></div>
+  <br />
+  <div><label><input class="chk" type="checkbox" />Show advanced options</label></div>
+  <div class="divAdvanced" style="display:none; padding:10px;">
+    <div>Custom url: <input type="text" /><span class="div"></span></div>
+  </div>
+</div>
+<div style="float:right; width:450px;">
+  <div class="divResult">
+  </div>
+</div>
+<br style="clear:both" />
+<script>
+$(document).ready(function(){
+  $(".chk").change(function(){
+    $('.divAdvanced').css('display', $('.chk').is(':checked') ? 'block' : 'none');
+  });
+
+  $('#btnShorten').click(function(){
+    $.ajax({
+      'method': 'post',
+      'url': 'shorten',
+      'beforeSend': function(){
+        $(".divResult").empty().append('<img src="images/loading.gif" />');
+      },
+      'complete': function(data){
+        $(".divResult").empty();
+      }
+    });
+  });
+});
+</script>
