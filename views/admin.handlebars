@@ -1,0 +1,88 @@
+<style>
+.btnDelete{
+  background:url('delete.png') no-repeat;
+  width:16px; height:16px;
+  display: inline-block;
+  cursor:pointer;
+  visibility: hidden;
+}
+tr:hover .btnDelete{
+  visibility: visible;
+}
+.alert{
+  background:#F2F1E1;
+  color:#969554;
+  border: 1px solid #D1D0A1;
+}
+</style>
+<h1>Admin</h1>
+<div style="float:right"><input id="btnHome" type="button" value="Home" /></div>
+<br /><br />
+<div><input id="btnDeleteEmpty" type="button" value="Delete Empty" /></div>
+<div id="divTable"></div>
+<script>
+$(document).ready(function(){
+  $('#btnHome').click(function(){
+    window.location = "/";
+  });
+  $('#btnDeleteEmpty').click(function(){
+    $.ajax({
+      'method': 'POST',
+      'url': '/deleteEmpty',
+      'success': function(){
+        loadUrls();
+      }
+    });
+  });
+  loadUrls();
+});
+
+function loadUrls(){
+  $.ajax({
+    'method': 'POST',
+    'url': '/getUrls',
+    'success': function(data){
+      var table = new Array();
+      table.push('<table class="table">');
+      table.push('<thead>');
+      table.push('<th></th>');
+      table.push('<th>#</th>');
+      table.push('<th>Long</th>');
+      table.push('<th>Short</th>');
+      table.push('<th>Clicks</th>');
+      table.push('</thead>');
+      table.push('<tbody>');
+      var cont = 1;
+      if (data.length == 0){
+        table.push('<tr>');
+        table.push('<td colspan=5 class="alert">No records found</td>');
+        table.push('</tr>');
+      }
+      $.each(data, function(idx, item){
+        table.push('<tr id="'+item._id+'">')
+        table.push('<td><div class="btnDelete"></div></td>');
+        table.push('<td>'+cont+'</td>');
+        table.push('<td>'+item.fullUrl+'</td>');
+        table.push('<td>http://localhost:3000/'+item.shortUrl+'</td>');
+        table.push('<td>'+item.count+'</td>');
+        table.push('</tr>');
+        cont++;
+      });
+      table.push('</tbody>');
+      table.push('</table>');
+      $('#divTable').empty().append(table.join(''));
+
+      $('.btnDelete').click(function(){
+        var id = $(this).closest('tr').attr('id');
+        $.ajax({
+          'method': 'POST',
+          'url': '/deleteUrl',
+          'success': function(){
+            loadUrls();
+          }
+        });
+      });
+    }
+  });
+}
+</script>

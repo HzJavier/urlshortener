@@ -18,3 +18,32 @@ h1{
   font-weight: bold;
   font-size: 1.5em;
 }
+
+.divResult{
+  background:#EEEEEE;
+  border: 1px solid #aaa;
+  padding:10px;
+  border-radius: 5px;
+}
+
+.table {
+  border: 1px solid #aaa;
+}
+
+.table th, .table td{
+  padding:10px;
+}
+
+.table thead tr{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eeeeee+0,cccccc+100;Gren+3D */
+  background: #eeeeee; /* Old browsers */
+  background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+  border-bottom:3px solid #AA0000;
+}
+
+.table tbody tr:nth-child(even){
+  background:#eee;
+}
