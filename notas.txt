@@ -1,0 +1,23 @@
+// /api/url
+// Redirect GET /url/:id (show)
+// List GET /url (index)
+// Create new POST /url (create)
+// CheckCustome POST /url/CheckCustome (check custom)
+//
+// // JSON //
+// url_controller.js
+// GET /api/url (listado) [{ originalUrl: "", shortUrl: ""}, {}]
+// GET /api/url/:id (show) { originalUrl: "", shortUrl: ""}
+// POST /api/url (create) -> params{ originalUrl: ""} => { success: false, errorMessage: "", data: null }
+// DELETE /api/url/:id - { success: false, errorMessage: "" }
+//
+// admin_controller.js
+// GET /admin (index)
+//
+// pages_controller.js
+// / (index)
+// /redirect ()
+//
+// PUT /url/:id (update)
+// DELETE /url (remove) *todos
+// DELETE /url/:id (remove) *uno

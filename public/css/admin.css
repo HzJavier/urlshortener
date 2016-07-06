@@ -1,0 +1,15 @@
+.btnDelete{
+  background:url('../delete.png') no-repeat;
+  width:16px; height:16px;
+  display: inline-block;
+  cursor:pointer;
+  visibility: hidden;
+}
+tr:hover .btnDelete{
+  visibility: visible;
+}
+.alert{
+  background:#F2F1E1;
+  color:#969554;
+  border: 1px solid #D1D0A1;
+}

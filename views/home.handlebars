@@ -1,77 +1,29 @@
+<script src="./scripts/home.js" type="text/javascript"></script>
+
 <h1>Welcome to the url shortener</h1>
 <div style="float:right"><input id="btnAdmin" type="button" value="admin" /></div>
-<br ?>
 <br />
-<div style="float:left; width:450px;">
-  <div>Link to shorten:</div>
-  <div><input id="txt" type="text" style="width:300px;" value="http://www.facebook.com/" /><input id="btnShorten" type="button" value="Shorten" /></div>
-  <br />
-  <div><label><input class="chk" type="checkbox" />Show advanced options</label></div>
-  <div class="divAdvanced" style="display:none; padding:10px;">
-    <div>Custom url: <input id="txtCustom" type="text" /><span class="div"></span><input id="hf" type="hidden" value="true" /></div>
-  </div>
-</div>
-<div style="float:right; width:450px;">
-  <div class="divResult" style="display:none;">
-  </div>
-</div>
+<br />
+
+<table>
+<tbody>
+  <tr>
+    <td style="width:45%;">
+      <div>Link to shorten:</div>
+      <div><input id="txt" type="text" style="width:300px;" value="http://www.facebook.com/" /><input id="btnShorten" type="button" value="Shorten" /></div>
+      <br />
+      <div><label><input class="chk" type="checkbox" />Show advanced options</label></div>
+      <div class="divAdvanced" style="display:none; padding:10px;">
+        <div>Custom url: <input id="txtCustom" type="text" /><span class="div"></span><input id="hf" type="hidden" value="true" /></div>
+      </div>
+    </td>
+    <td style="width:10%;">
+    </td>
+    <td style="width:45%;">
+      <div class="divResult" style="display:none;">
+      </div>
+    </td>
+  </tr>
+</tbody>
+</table>
 <br style="clear:both" />
-<script>
-$(document).ready(function(){
-  $(".chk").change(function(){
-    $('.divAdvanced').css('display', $('.chk').is(':checked') ? 'block' : 'none');
-  });
-
-  $('#btnAdmin').click(function(){
-    window.location = "/admin";
-  });
-
-  $('#txtCustom').keyup(function(){
-    if ($(this).val().length == 0){
-      $('.div').html('');
-      $('#hf').val(true);
-      return false;
-    }
-    $.ajax({
-      'method': 'POST',
-      'url': '/custom',
-      'data': { 'text': $(this).val() },
-      'success': function(data){
-        $('.div').html('<img src="' + (data ? 'accept.png' : 'cancel.png') + '" />');
-        $('#hf').val(data);
-      }
-    });
-  });
-
-  $('#btnShorten').click(function(){
-    var hf = $('#hf').val();
-    if (hf == 'false'){
-      alert('The custum value you are trying to use is invalid');
-      return false;
-    }
-
-    var text = $('#txt').val();
-    var regex = new RegExp("(http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?")
-    if (text.length == 0){
-      alert('You must write an url');
-      return false;
-    }
-    if (!regex.test(text)){
-      alert('Not a valid url');
-      return false;
-    }
-
-    $.ajax({
-      'method': 'post',
-      'url': '/shorten',
-      'data': { 'url': text, 'chk': $('#hf').val(), 'custom': $('#txtCustom').val() },
-      'beforeSend': function(){
-        $(".divResult").empty().append('<img src="images/loading.gif" />');
-      },
-      'success': function(data){
-        $(".divResult").empty().append('<a href="'+data.url+'">'+data.url+'</a>').show();
-      }
-    });
-  });
-});
-</script>
